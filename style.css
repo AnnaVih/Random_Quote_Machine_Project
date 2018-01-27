@@ -1,0 +1,86 @@
+/* Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+/* General */
+#wrapper {
+    background-color:purple;
+    height: 100vh;
+}
+
+.footer {
+    overflow: hidden;
+}
+
+.btn {
+    background-color: purple;
+    border-radius: 4px;
+    padding: 1%;
+    height: 40px;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+.btn-social {
+    width: 50px;
+    margin-left: 3%;
+    float: left;
+}
+
+.btn-social a {
+    font-size: 1.2em;
+}
+
+.btn-quote a{
+    font-size: 0.8em;
+}
+
+.btn-quote {
+    width: 100px;
+    margin-right: 3%;
+    font-size: 1em;
+    float: right;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+   
+}
+
+p {
+    text-align: center;
+}
+
+
+/* Random quote box*/
+#random-quote-box{
+    background-color: white;
+    width: 700px;
+    min-width: 700px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -350px;;
+}
+
+/* Random quote */
+.random-quote {
+    padding: 10%;
+    min-height: 200px;
+}
+
+.author-name{
+    padding: 50px;
+    text-align: right;
+    font-size: 15px;
+}
+
