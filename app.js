@@ -21,14 +21,20 @@ const UICtrl = (function(){
 
         //Display quotes on UI
         show: function(data){
-            let output = '';
-           
+            let output = '',twitterLink, faceBookLink, randomQuote;
+
+            twitterLink = document.getElementById('twitterLink');
+            faceBookLink = document.getElementById('facebookLink');
+            randomQuote = document.querySelector('.random-quote');
+
             //Loop over data
             data.forEach(function(quote){
-                output += `<i class="fa fa-quote-left"></i>${quote.content}<p class="author-name">${quote.title}</p>`;
+                output += `<i class="fa fa-quote-left"></i>${quote.content}<p class="author-name"> - ${quote.title}</p>`;
+                twitterLink.href = "http://twitter.com/intent/tweet?hashtags=LikeRandomQuoteMachineByAnnaVihrogonova&text=" + encodeURIComponent(quote.content);
+                faceBookLink.href = "http://www.facebook.com/sharer.php?u=http://127.0.0.1:5500/" + encodeURIComponent(quote.content);
             });
-
-            document.querySelector('.random-quote').innerHTML = output;
+            
+            randomQuote.innerHTML = output;
         },
 
         //Display random color 
