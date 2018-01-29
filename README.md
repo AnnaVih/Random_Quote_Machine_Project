@@ -7,6 +7,14 @@
  
  Created  with vanila JS without any framework.
 
+ ---
+
+## Contributors
+
+- Anna Vihrogonova <annavihrogonova@yahoo.com>
+
+ ---
+
  ## License & copyright
 
  &copy; Anna Vihrogonova, motivated & passionated Front End Developer 
