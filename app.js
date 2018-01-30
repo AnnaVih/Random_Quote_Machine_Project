@@ -37,6 +37,7 @@ const UICtrl = (function(){
             randomQuote.innerHTML = output;
         },
 
+
         //Display random color 
         displayRandomColor: function(){
             let hex , randomQuote, elements;
@@ -57,6 +58,8 @@ const UICtrl = (function(){
             //    randomQuote.style.transition = 'color 3s';
             });
         },
+
+
         //FadeOut and FadeIn
         fadeOutAndFadeIn: function(element, classVisible, classHidden){
             
@@ -77,6 +80,7 @@ const UICtrl = (function(){
 })();
 
 
+
 /***********************************
 ******** APP controller *************
 ***********************************/
@@ -90,11 +94,12 @@ const AppCtrl = (function( UICtrl){
     }
 
 
+    //Click event to GET response from API and show data on UI
     function displayDataInfo(){
         let url, bustCache, randomQuoteEl;
         randomQuoteEl = document.querySelector('.random-quote');
 
-        // Getting response from API
+        
         url = 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1';
         bustCache = '?' + new Date().getTime();
 
@@ -108,13 +113,15 @@ const AppCtrl = (function( UICtrl){
 
         //Random color
         UICtrl.displayRandomColor();
-
     }
 
+
+    //Click event for fade out/in efect
     function fadeInOut(){
         let randomQuote;
         randomQuote = document.querySelector('.random-quote');
         console.log(randomQuote);
+
         //Fade out and fadeIn
         UICtrl.fadeOutAndFadeIn( randomQuote, 'visible', 'hidden');
    }
@@ -130,5 +137,5 @@ const AppCtrl = (function( UICtrl){
      
 })( UICtrl);
 
-//Invoke init function
+//Invoke init function 
 AppCtrl.init();
