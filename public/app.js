@@ -87,7 +87,7 @@ const UICtrl = (function(){
 const AppCtrl = (function( UICtrl){
 
     // Function for eventListeners
-    function evenetListeners() {
+    function eventListeners() {
         window.addEventListener('load', displayDataInfo);
         document.querySelector('.btn-quote').addEventListener('click', displayDataInfo);
         document.querySelector('.btn-quote').addEventListener('click', fadeInOut);
@@ -130,7 +130,7 @@ const AppCtrl = (function( UICtrl){
     /*************** PUBLIC METHODS ****************/
     return {
        init: function() {
-           return evenetListeners();
+           return eventListeners();
        }
 
 }
