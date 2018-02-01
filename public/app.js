@@ -134,11 +134,11 @@ const AppCtrl = (function( UICtrl){
     selectors = UICtrl.getSelectors();
 
     // Function for eventListeners
-    function eventListeners() {
-        window.addEventListener('load', displayDataInfo);
-        document.querySelector(selectors.btnQuote).addEventListener('click', displayDataInfo);
-        document.querySelector(selectors.btnQuote).addEventListener('click', fadeInOut);
-    }
+    // function eventListeners() {
+    //     window.addEventListener('load', displayDataInfo);
+    //     document.querySelector(selectors.btnQuote).addEventListener('click', displayDataInfo);
+    //     document.querySelector(selectors.btnQuote).addEventListener('click', fadeInOut);
+    // }
 
 
     //Click event to GET response from API and show data on UI
