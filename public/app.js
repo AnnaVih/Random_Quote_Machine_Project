@@ -86,14 +86,6 @@ const UICtrl = (function(){
 ***********************************/
 const AppCtrl = (function( UICtrl){
 
-    // Function for eventListeners
-    function eventListeners() {
-        window.addEventListener('load', displayDataInfo);
-        document.querySelector('.btn-quote').addEventListener('click', displayDataInfo);
-        document.querySelector('.btn-quote').addEventListener('click', fadeInOut);
-    }
-
-
     //Click event to GET response from API and show data on UI
     function displayDataInfo(){
         let url, bustCache, randomQuoteEl;
@@ -129,9 +121,13 @@ const AppCtrl = (function( UICtrl){
 
     /*************** PUBLIC METHODS ****************/
     return {
-       init: function() {
-           return eventListeners();
-       }
+      init: function() {
+        displayDataInfo()
+      },
+      newQuote: ()=>{
+      	displayDataInfo()
+      	fadeInOut()
+      }
 
 }
      
