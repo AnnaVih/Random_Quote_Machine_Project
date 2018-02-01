@@ -8,10 +8,10 @@ var QuotesService = function(url) {
 QuotesService.prototype.getApiData = function(){
     
        //Fetch data from api service
-       fetch(this.url + this.bustCache)
+       return fetch(this.url + this.bustCache)
               .then(res => res.json())
               .then(function(data){
-                console.log(data);
+                // console.log(data);
                 return data;
               })
               .catch(err => console.log(err));
@@ -114,7 +114,7 @@ const UICtrl = (function(){
             },600);
         },
 
-        //Get selectors
+        //Return  selectors object
         getSelectors: function(){
             return UISelectors;
         }
@@ -132,8 +132,9 @@ const AppCtrl = (function( UICtrl){
     selectors = UICtrl.getSelectors();
 
     //Click event to GET response from API and show data on UI
-    function displayDataInfo(e){
+    function displayDataInfo(){
             let newApiService, quotes, randomQuoteEl;
+
             randomQuoteEl = document.querySelector(selectors.randomQuote);
 
             //1. Make instance of ApiService
@@ -142,20 +143,16 @@ const AppCtrl = (function( UICtrl){
             //2. Invoke apiData method
             quotes = newApiService.getApiData();
             
-        
             //3.Pass recieved data from service to UIController
-                console.log(quotes);
-                UICtrl.show(quotes);
+            quotes.then(quote => {UICtrl.show(quote)});
 
             //4.Create Random color
             UICtrl.displayRandomColor();
-
-            // e.preventDefault();
      }
 
 
     //Click event for fade out/in efect
-    function fadeInOut(e){
+    function fadeInOut(){
         let randomQuote;
 
         randomQuote = document.querySelector(selectors.randomQuote);
