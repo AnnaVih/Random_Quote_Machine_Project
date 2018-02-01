@@ -133,8 +133,6 @@ const AppCtrl = (function( UICtrl){
     //Get selectors
     selectors = UICtrl.getSelectors();
 
-
-
     //Click event to GET response from API and show data on UI
     function displayDataInfo(e){
             let newApiService, quotes, randomQuoteEl;
