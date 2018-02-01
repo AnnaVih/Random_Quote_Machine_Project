@@ -129,6 +129,7 @@ const UICtrl = (function(){
 ***********************************/
 const AppCtrl = (function( UICtrl){
     let selectors;
+    selectors = UICtrl.getSelectors();
 
     //Click event to GET response from API and show data on UI
     function displayDataInfo(e){
@@ -149,7 +150,7 @@ const AppCtrl = (function( UICtrl){
             //4.Create Random color
             UICtrl.displayRandomColor();
 
-            e.preventDefault();
+            // e.preventDefault();
      }
 
 
@@ -162,7 +163,7 @@ const AppCtrl = (function( UICtrl){
         //Fade out and fadeIn
         UICtrl.fadeOutAndFadeIn( randomQuote, 'visible', 'hidden');
 
-        e.preventDefault();
+        // e.preventDefault();
    }
 
 
