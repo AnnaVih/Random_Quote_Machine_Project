@@ -1,7 +1,40 @@
+//Create constructor class 
+var QuotesService = function(url) {
+    this.url = url;
+    this.bustCache = '?' + new Date().getTime();
+};
+
+//Create prototype method for getting data
+QuotesService.prototype.getApiData = function(){
+    
+       //Fetch data from api service
+       fetch(this.url + this.bustCache)
+              .then(res => res.json())
+              .then(function(data){
+                console.log(data);
+                return data;
+              })
+              .catch(err => console.log(err));
+              
+}
+
+
+
 /***********************************
 ******** UI controller *************
 ***********************************/
 const UICtrl = (function(){
+
+     //Object with ids and classes
+     const UISelectors = {
+        twitterLink:  '#twitterLink',
+        facebookLink: '#facebookLink',
+        randomQuote:  '.random-quote',
+        wrapper:      '#wrapper',
+        btn:          '.btn',
+        btnQuote:     '.btn-quote',
+        body:         'body'
+    };
 
     //Random color 
     function randomColor(){
@@ -21,33 +54,39 @@ const UICtrl = (function(){
 
         //Display quotes on UI
         show: function(data){
-            let output = '',twitterLink, faceBookLink, randomQuote;
+            let output = '', twitterLink, faceBookLink, randomQuote;
 
-            twitterLink = document.getElementById('twitterLink');
-            faceBookLink = document.getElementById('facebookLink');
-            randomQuote = document.querySelector('.random-quote');
+            //Getting dom elements
+            twitterLink = document.querySelector(UISelectors.twitterLink);
+            faceBookLink = document.querySelector(UISelectors.facebookLink);
+            randomQuote = document.querySelector(UISelectors.randomQuote);
 
             //Loop over data
-            data.forEach(function(quote){
-                output += `<i class="fa fa-quote-left"></i>${quote.content}<p class="author-name"> - ${quote.title}</p>`;
-                twitterLink.href = "http://twitter.com/intent/tweet?hashtags=LikeRandomQuoteMachineByAnnaVihrogonova&text=" + encodeURIComponent(quote.content);
-                faceBookLink.href = "http://www.facebook.com/sharer.php?u=http://127.0.0.1:5500/" + encodeURIComponent(quote.content);
-            });
-            
+            if(data){
+                data.forEach(function(quote){
+                    output += `<i class="fa fa-quote-left"></i>${quote.content}<p class="author-name"> - ${quote.title}</p>`;
+                    twitterLink.href = "http://twitter.com/intent/tweet?hashtags=LikeRandomQuoteMachineByAnnaVihrogonova&text=" + encodeURIComponent(quote.content);
+                    faceBookLink.href = "http://www.facebook.com/sharer.php?u=http://127.0.0.1:5500/" + encodeURIComponent(quote.content);
+                });
+            }else {
+                //If no data pass just show fallback default text to user
+                output += `<p>Sorry something went wrong, Please check your internet connection</p>`;
+            }
+
             randomQuote.innerHTML = output;
         },
 
 
         //Display random color 
         displayRandomColor: function(){
-            let hex , randomQuote, elements;
+            let hex, randomQuote, elements;
 
             //Getting random color from private function
             hex = randomColor();
 
             //Getting elements from DOM
-            randomQuote = document.querySelector('.random-quote');
-            elements = document.querySelectorAll('body,' + '#wrapper,' + '.btn');
+            randomQuote = document.querySelector(UISelectors.randomQuote);
+            elements = document.querySelectorAll(UISelectors.body + ',' + UISelectors.wrapper + ',' + UISelectors.btn);
 
             //Loop over elements, assign hex random
             //color for background and font color
@@ -55,7 +94,6 @@ const UICtrl = (function(){
                element.style.backgroundColor = hex;
                element.style.transition = 'background 2s';
                randomQuote.style.color = hex;
-            //    randomQuote.style.transition = 'color 3s';
             });
         },
 
@@ -74,6 +112,11 @@ const UICtrl = (function(){
                 element.className += ' ' + classVisible;
                 
             },600);
+        },
+
+        //Get selectors
+        getSelectors: function(){
+            return UISelectors;
         }
     }
 
@@ -85,37 +128,41 @@ const UICtrl = (function(){
 ******** APP controller *************
 ***********************************/
 const AppCtrl = (function( UICtrl){
+    let selectors;
 
     //Click event to GET response from API and show data on UI
-    function displayDataInfo(){
-        let url, bustCache, randomQuoteEl;
-        randomQuoteEl = document.querySelector('.random-quote');
+    function displayDataInfo(e){
+            let newApiService, quotes, randomQuoteEl;
+            randomQuoteEl = document.querySelector(selectors.randomQuote);
 
+            //1. Make instance of ApiService
+            newApiService =  new QuotesService('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1');
+            
+            //2. Invoke apiData method
+            quotes = newApiService.getApiData();
+            
         
-        url = 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1';
-        bustCache = '?' + new Date().getTime();
+            //3.Pass recieved data from service to UIController
+                console.log(quotes);
+                UICtrl.show(quotes);
 
-            fetch(url + bustCache)
-             .then(res => res.json())
-             .then(function(data){
-                UICtrl.show(data);
-                console.log(data);
-            })
-            .catch(err => console.log(err));
+            //4.Create Random color
+            UICtrl.displayRandomColor();
 
-        //Random color
-        UICtrl.displayRandomColor();
-    }
+            e.preventDefault();
+     }
 
 
     //Click event for fade out/in efect
-    function fadeInOut(){
+    function fadeInOut(e){
         let randomQuote;
-        randomQuote = document.querySelector('.random-quote');
-        console.log(randomQuote);
+
+        randomQuote = document.querySelector(selectors.randomQuote);
 
         //Fade out and fadeIn
         UICtrl.fadeOutAndFadeIn( randomQuote, 'visible', 'hidden');
+
+        e.preventDefault();
    }
 
 
@@ -131,7 +178,7 @@ const AppCtrl = (function( UICtrl){
 
 }
      
-})( UICtrl);
+})(UICtrl);
 
 //Invoke init function 
 AppCtrl.init();
