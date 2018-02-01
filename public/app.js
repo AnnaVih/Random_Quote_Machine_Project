@@ -130,9 +130,6 @@ const UICtrl = (function(){
 const AppCtrl = (function( UICtrl){
     let selectors;
 
-    //Get selectors
-    selectors = UICtrl.getSelectors();
-
     //Click event to GET response from API and show data on UI
     function displayDataInfo(e){
             let newApiService, quotes, randomQuoteEl;
@@ -171,9 +168,13 @@ const AppCtrl = (function( UICtrl){
 
     /*************** PUBLIC METHODS ****************/
     return {
-       init: function() {
-           return eventListeners();
-       }
+      init: function() {
+        displayDataInfo()
+      },
+      newQuote: ()=>{
+      	displayDataInfo()
+      	fadeInOut()
+      }
 
 }
      
