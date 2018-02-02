@@ -12,6 +12,7 @@
 /* General */
 #wrapper {
     height: 100vh;
+    text-align: center;
 }
 
 .footer {
@@ -55,6 +56,13 @@ a {
 
 p {
     text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    padding: 3%;
+    color: #fff;
+    text-shadow: 1px 1px 1px grey;
 }
 
 span {
@@ -109,12 +117,30 @@ span {
 
   /*For mobile screen*/
   @media (max-width: 500px) { 
-      
+
     #random-quote-box{
         padding: 2%;
         width: 350px;
         position: static;
         margin: 15% auto;
         min-width: 350px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 350px){
+    * {
+        font-size: 15px;
+    }
+
+    #random-quote-box{
+        padding: 2%;
+        width: 280px;
+        position: static;
+        margin: 15% auto;
+        min-width: 280px;
     }
 }
