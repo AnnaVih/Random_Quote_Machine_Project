@@ -75,10 +75,13 @@ span {
     left: 50%;
     margin-top: -300px;
     margin-left: -350px;
-
 }
 
 /* Random quote */
+.quote-mark {
+    padding: 10px;
+    font-size: 30px;
+}
 .random-quote {
     min-height: 200px;
 }
