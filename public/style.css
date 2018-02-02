@@ -109,17 +109,12 @@ span {
 
   /*For mobile screen*/
   @media (max-width: 500px) { 
+      
     #random-quote-box{
-       
-        width: 300px;
-        min-width: 300px;
-        height: auto;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -150px;
-        margin-left: -150px;
-    
+        padding: 2%;
+        width: 350px;
+        position: static;
+        margin: 15% auto;
+        min-width: 350px;
     }
-    
-   }
+}
