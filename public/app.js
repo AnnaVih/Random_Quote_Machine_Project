@@ -77,7 +77,7 @@ const UICtrl = (function(){
             hex = randomColor();
 
             //Getting elements from DOM object
-            elements = [UISelectors.body, UISelectors.wrapper, UISelectors.btn[0], UISelectors.btn[1], UISelectors.btn[2]];
+            elements = [UISelectors.body, UISelectors.wrapper, UISelectors.btn[0], UISelectors.btn[1], UISelectors.btn[2], UISelectors.btn[3]];
 
             //Loop over elements, assign hex random
             //color for background and font color
@@ -133,7 +133,7 @@ const AppCtrl = (function( UICtrl){
             quotes = newApiService.getApiData();
             
             //3.Pass recieved data from service to UIController
-            quotes.then(actualQuote => {console.log(actualQuote);UICtrl.show(actualQuote)});
+            quotes.then(actualQuote => {UICtrl.show(actualQuote)});
             
             //4.Create Random color
             UICtrl.displayRandomColor();
