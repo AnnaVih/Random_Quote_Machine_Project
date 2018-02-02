@@ -30,10 +30,9 @@ const UICtrl = (function(){
         twitterLink:  document.querySelector('#twitterLink'),
         facebookLink: document.querySelector('#facebookLink'),
         randomQuote:  document.querySelector('.random-quote'),
-        wrapper:      '#wrapper',
-        btn:          '.btn',
-        btnQuote:     '.btn-quote',
-        body:         'body'
+        wrapper:      document.querySelector('#wrapper'),
+        btn:          document.querySelectorAll('.btn'),
+        body:         document.querySelector('body')
     };
 
     //Random color 
@@ -59,8 +58,8 @@ const UICtrl = (function(){
             //Loop over data
             if(quote){
                     output += `<p><i class="fa fa-quote-left quote-mark"></i>${quote.quote}</p><p class="author-name"> - ${quote.author}</p>`;
-                    UISelectors.twitterLink.href = "http://twitter.com/intent/tweet?hashtags=LikeRandomQuoteMachineByAnnaVihrogonova&text=" + encodeURIComponent(quote.content);
-                    UISelectors.facebookLink.href = "http://www.facebook.com/sharer.php?u=http://127.0.0.1:5500/" + encodeURIComponent(quote.content);
+                    UISelectors.twitterLink.href = "http://twitter.com/intent/tweet?hashtags=LikeRandomQuoteMachineByAnnaVihrogonova&text=" + encodeURIComponent(quote.quote);
+                    UISelectors.facebookLink.href = "http://www.facebook.com/sharer.php?u=http://annavihrogonova.co.uk/RandomQuote/index.html";
             }else {
                 //If no data pass just show fallback default text to user
                 output += `<p><i class="fa fa-quote-left quote-mark"></i>Sorry something went wrong, Please check your internet connection</p>`;
@@ -77,9 +76,8 @@ const UICtrl = (function(){
             //Getting random color from private function
             hex = randomColor();
 
-            //Getting elements from DOM
-            
-            elements = document.querySelectorAll(UISelectors.body + ',' + UISelectors.wrapper + ',' + UISelectors.btn);
+            //Getting elements from DOM object
+            elements = [UISelectors.body, UISelectors.wrapper, UISelectors.btn[0], UISelectors.btn[1], UISelectors.btn[2]];
 
             //Loop over elements, assign hex random
             //color for background and font color
