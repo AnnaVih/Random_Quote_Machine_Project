@@ -27,9 +27,9 @@ const UICtrl = (function(){
 
      //Object with ids and classes
      const UISelectors = {
-        twitterLink:  '#twitterLink',
-        facebookLink: '#facebookLink',
-        randomQuote:  '.random-quote',
+        twitterLink:  document.querySelector('#twitterLink'),
+        facebookLink: document.querySelector('#facebookLink'),
+        randomQuote:  document.querySelector('.random-quote'),
         wrapper:      '#wrapper',
         btn:          '.btn',
         btnQuote:     '.btn-quote',
@@ -52,28 +52,21 @@ const UICtrl = (function(){
 
     return {
 
-        //Display quotes on UI
-        show: function(data){
-            let output = '', twitterLink, faceBookLink, randomQuote;
-
-            //Getting dom elements
-            twitterLink = document.querySelector(UISelectors.twitterLink);
-            faceBookLink = document.querySelector(UISelectors.facebookLink);
-            randomQuote = document.querySelector(UISelectors.randomQuote);
+        //Display quote on UI
+        show: function(quote){
+            let output = '';
 
             //Loop over data
-            if(data){
-                data.forEach(function(quote){
-                    output += `<i class="fa fa-quote-left"></i>${quote.content}<p class="author-name"> - ${quote.title}</p>`;
-                    twitterLink.href = "http://twitter.com/intent/tweet?hashtags=LikeRandomQuoteMachineByAnnaVihrogonova&text=" + encodeURIComponent(quote.content);
-                    faceBookLink.href = "http://www.facebook.com/sharer.php?u=http://127.0.0.1:5500/" + encodeURIComponent(quote.content);
-                });
+            if(quote){
+                    output += `<p><i class="fa fa-quote-left quote-mark"></i>${quote.quote}</p><p class="author-name"> - ${quote.author}</p>`;
+                    UISelectors.twitterLink.href = "http://twitter.com/intent/tweet?hashtags=LikeRandomQuoteMachineByAnnaVihrogonova&text=" + encodeURIComponent(quote.content);
+                    UISelectors.facebookLink.href = "http://www.facebook.com/sharer.php?u=http://127.0.0.1:5500/" + encodeURIComponent(quote.content);
             }else {
                 //If no data pass just show fallback default text to user
-                output += `<p>Sorry something went wrong, Please check your internet connection</p>`;
+                output += `<p><i class="fa fa-quote-left quote-mark"></i>Sorry something went wrong, Please check your internet connection</p>`;
             }
 
-            randomQuote.innerHTML = output;
+            UISelectors.randomQuote.innerHTML = output;
         },
 
 
@@ -85,7 +78,7 @@ const UICtrl = (function(){
             hex = randomColor();
 
             //Getting elements from DOM
-            randomQuote = document.querySelector(UISelectors.randomQuote);
+            
             elements = document.querySelectorAll(UISelectors.body + ',' + UISelectors.wrapper + ',' + UISelectors.btn);
 
             //Loop over elements, assign hex random
@@ -93,7 +86,7 @@ const UICtrl = (function(){
             elements.forEach(function(element){
                element.style.backgroundColor = hex;
                element.style.transition = 'background 2s';
-               randomQuote.style.color = hex;
+               UISelectors.randomQuote.style.color = hex;
             });
         },
 
@@ -133,19 +126,17 @@ const AppCtrl = (function( UICtrl){
 
     //Click event to GET response from API and show data on UI
     function displayDataInfo(){
-            let newApiService, quotes, randomQuoteEl;
-
-            randomQuoteEl = document.querySelector(selectors.randomQuote);
+            let newApiService, quotes;
 
             //1. Make instance of ApiService
-            newApiService =  new QuotesService('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1');
+            newApiService =  new QuotesService('https://talaikis.com/api/quotes/random/');
             
             //2. Invoke apiData method
             quotes = newApiService.getApiData();
             
             //3.Pass recieved data from service to UIController
-            quotes.then(quote => {UICtrl.show(quote)});
-
+            quotes.then(actualQuote => {console.log(actualQuote);UICtrl.show(actualQuote)});
+            
             //4.Create Random color
             UICtrl.displayRandomColor();
      }
@@ -153,12 +144,9 @@ const AppCtrl = (function( UICtrl){
 
     //Click event for fade out/in efect
     function fadeInOut(){
-        let randomQuote;
-
-        randomQuote = document.querySelector(selectors.randomQuote);
 
         //Fade out and fadeIn
-        UICtrl.fadeOutAndFadeIn( randomQuote, 'visible', 'hidden');
+        UICtrl.fadeOutAndFadeIn(selectors.randomQuote, 'visible', 'hidden');
 
         // e.preventDefault();
    }
