@@ -95,7 +95,7 @@ span {
 }
 
 .author-name{
-    padding: 50px;
+    padding: 50px 3%;
     text-align: right;
     font-size: 15px;
 }
@@ -116,31 +116,42 @@ span {
 
 
   /*For mobile screen*/
-  @media (max-width: 500px) { 
+  @media (max-width: 767px) { 
 
-    #random-quote-box{
-        padding: 2%;
-        width: 350px;
-        position: static;
-        margin: 15% auto;
-        min-width: 350px;
+    * {
+        font-size: 15px;
     }
 
     h1 {
         font-size: 1.4rem;
     }
-}
 
-@media (max-width: 350px){
-    * {
+    .btn {
+        padding: 2.5%;
+    }
+
+    span {
+        font-size: 12px;
+    }
+
+    #random-quote-box {
+        padding: 2%;
+        width: 350px;
+        position: static;
+        margin: 10% auto;
+        min-width: 350px;
+    }
+
+    .author-name {
+        padding: 30px 3%;
+    }
+
+    .quote-mark {
+        padding: 5px;
         font-size: 15px;
     }
 
-    #random-quote-box{
-        padding: 2%;
-        width: 280px;
-        position: static;
-        margin: 15% auto;
-        min-width: 280px;
+    .random-quote {
+        min-height: 180px;
     }
 }
